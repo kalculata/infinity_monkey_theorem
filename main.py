@@ -3,7 +3,7 @@ import random
 
 class DNA:
   def __init__(self, size, mutation_rate):
-    self.genes = []
+    self.genes = [DNA.make_gene() for _ in range(size)]
     self.size = size
     self.mutation_rate = mutation_rate
 
@@ -19,6 +19,16 @@ class DNA:
     
     return child
 
+  @staticmethod
+  def make_gene():
+    hex_code = random.randrange(63, 123)
+
+    if hex_code == 63: 
+      hex_code = 32
+    if hex_code == 64:
+      hex_code = 46
+    
+    return chr(hex_code)
 
 class Population:
   def __init__(self, target, size, mutation_rate):
