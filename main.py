@@ -2,7 +2,12 @@ import random
 
 
 class DNA:
-  def __init__(self):
+  def __init__(self, size, mutation_rate):
+    self.genes = []
+    self.size = size
+    self.mutation_rate = mutation_rate
+
+  def crossover(self, partener):
     pass
 
 
