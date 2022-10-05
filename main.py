@@ -1,3 +1,4 @@
+from asyncore import poll
 from math import floor
 import random
 
@@ -28,14 +29,10 @@ class DNA:
 
   @staticmethod
   def make_gene():
-    hex_code = random.randrange(63, 123)
-
-    if hex_code == 63: 
-      hex_code = 32
-    if hex_code == 64:
-      hex_code = 46
+    genotype = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890. +-=@:/"
+    index = random.randrange(len(genotype))
     
-    return chr(hex_code)
+    return genotype[index]
 
 class Population:
   def __init__(self, target, size, mutation_rate):
@@ -71,7 +68,7 @@ class Population:
   def reproduction(self):
     self.mappingpool = []
     
-    # make a matingpool
+    # make a mappingpool
     for i in range(len(self.elements)):
       fitness = Utils.rescale(self.fitness[i], 0, self.max_fitness, 0, 1)
       n = floor(fitness * 100)
@@ -104,8 +101,8 @@ class Utils:
     return ((n-start) / (stop-start)) * (new_stop-new_start) + new_start
 
 
-# parameters
-target = "Huzaifa Nimushimirimana a.k.a Kalculta."
+# parameters (you can change them as you wish)
+target = "https://www.kubwacu.com"
 population_size = 300
 mutation_rate = 0.01
 
