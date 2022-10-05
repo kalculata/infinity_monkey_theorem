@@ -42,17 +42,25 @@ class Population:
     self.target = target
     self.generation = 0
     self.fitness = []
+    self.max_fitness = 0
+    self.max_fitness_dna = None
+    self.mappingpool = []
   
   def _fitness(self, dna):
     score = 0
     for i in range(len(dna.genes)):
       if(self.target[i] == dna.genes[i]):
         score += 1
-        
+
     return pow(score / len(self.target), 10)
 
   def selection(self):
-    pass
+    self.fitness = [self._fitness(dna) for dna in self.dnas]
+
+    for i in range(len(self.fitness)):
+      if self.fitness[i] > self.max_fitness:
+        self.max_fitness = self.fitness[i]
+        self.max_fitness_dna = self.dnas[i]
 
   def reproduction(self):
     pass
