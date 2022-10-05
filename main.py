@@ -18,6 +18,12 @@ class DNA:
         child.genes[i] = partener.genes[i]
     
     return child
+  
+
+  def mutate(self):
+    for i in range(len(self.genes)):
+      if(random.random() < self.mutation_rate):
+        self.genes[i] = DNA.make_gene()
 
   @staticmethod
   def make_gene():
