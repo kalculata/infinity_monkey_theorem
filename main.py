@@ -26,4 +26,14 @@ mutation_rate = 0.01
 # initialization
 population = Population(target, population_size, mutation_rate)
 
+# evolution
+while True:
+  population.selection()
+  population.reproduction()
 
+  test = population.evaluate()
+
+  if test:
+    print(test)
+    print("Best generation: ", population.generation)
+    break
