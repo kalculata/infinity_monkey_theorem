@@ -62,6 +62,7 @@ class Population:
       if self.fitness[i] > self.max_fitness:
         self.max_fitness = self.fitness[i]
         self.max_fitness_dna = self.elements[i]
+    print(f"Generation #{self.generation}) {''.join(self.max_fitness_dna.genes)}")
 
   def reproduction(self):
     self.mappingpool = []
@@ -98,7 +99,7 @@ class Population:
 class Utils:
   @staticmethod
   def rescale(n, start, stop, new_start, new_stop):
-    pass
+    return ((n-start) / (stop-start)) * (new_stop-new_start) + new_start
 
 
 # parameters
