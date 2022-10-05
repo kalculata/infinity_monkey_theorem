@@ -1,3 +1,4 @@
+from math import floor
 import random
 
 
@@ -63,7 +64,28 @@ class Population:
         self.max_fitness_dna = self.dnas[i]
 
   def reproduction(self):
-    pass
+    self.mappingpool = []
+    
+    # make a matingpool
+    for i in range(len(self.dnas)):
+      fitness = Utils.rescale(self.fitness[i], 0, self.max_fitness, 0, 1)
+      n = floor(fitness * 100)
+      for _ in range(n):
+        self.mappingpool.append(self.dnas[i])
+
+    # new generation
+    for i in range(len(self.dnas)):
+      a = random.randrange(len(self.mappingpool))
+      b = random.randrange(len(self.mappingpool))
+      parent1 = self.mappingpool[a]
+      parent2 = self.mappingpool[b]
+
+      child = parent1.crossover(parent2)
+      child.mutate()
+
+      self.dnas[i] = child
+    
+    self.generation += 1
 
   def evaluate(self):
     pass
