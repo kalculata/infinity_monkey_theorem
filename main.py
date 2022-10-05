@@ -42,7 +42,23 @@ class Population:
     self.target = target
     self.generation = 0
     self.fitness = []
+  
+  def _fitness(self, dna):
+    score = 0
+    for i in range(len(dna.genes)):
+      if(self.target[i] == dna.genes[i]):
+        score += 1
+        
+    return pow(score / len(self.target), 10)
 
+  def selection(self):
+    pass
+
+  def reproduction(self):
+    pass
+
+  def evaluate(self):
+    pass
 
 class Utils:
   @staticmethod
