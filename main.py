@@ -103,7 +103,7 @@ class Utils:
 
 
 # parameters
-target = "No matter where you go know that you not alone."
+target = "Huzaifa Nimushimirimana a.k.a Kalculta."
 population_size = 300
 mutation_rate = 0.01
 
