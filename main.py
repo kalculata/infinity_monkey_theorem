@@ -8,7 +8,16 @@ class DNA:
     self.mutation_rate = mutation_rate
 
   def crossover(self, partener):
-    pass
+    child = DNA(len(self.genes), self.mutation_rate)
+    midpoint = random.randrange(len(self.genes))
+
+    for i in range(len(self.genes)):
+      if i > midpoint:
+        child.genes[i] = self.genes[i]
+      else:
+        child.genes[i] = partener.genes[i]
+    
+    return child
 
 
 class Population:
