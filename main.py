@@ -7,8 +7,11 @@ class DNA:
 
 
 class Population:
-  def __init__(self):
-    pass
+  def __init__(self, target, size, mutation_rate):
+    self.elements = [DNA(len(target), mutation_rate) for _ in range(size)]
+    self.target = target
+    self.generation = 0
+    self.fitness = []
 
 
 class Utils:
