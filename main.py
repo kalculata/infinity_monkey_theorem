@@ -56,25 +56,25 @@ class Population:
     return pow(score / len(self.target), 10)
 
   def selection(self):
-    self.fitness = [self._fitness(dna) for dna in self.dnas]
+    self.fitness = [self._fitness(dna) for dna in self.elements]
 
     for i in range(len(self.fitness)):
       if self.fitness[i] > self.max_fitness:
         self.max_fitness = self.fitness[i]
-        self.max_fitness_dna = self.dnas[i]
+        self.max_fitness_dna = self.elements[i]
 
   def reproduction(self):
     self.mappingpool = []
     
     # make a matingpool
-    for i in range(len(self.dnas)):
+    for i in range(len(self.elements)):
       fitness = Utils.rescale(self.fitness[i], 0, self.max_fitness, 0, 1)
       n = floor(fitness * 100)
       for _ in range(n):
-        self.mappingpool.append(self.dnas[i])
+        self.mappingpool.append(self.elements[i])
 
     # new generation
-    for i in range(len(self.dnas)):
+    for i in range(len(self.elements)):
       a = random.randrange(len(self.mappingpool))
       b = random.randrange(len(self.mappingpool))
       parent1 = self.mappingpool[a]
@@ -83,12 +83,17 @@ class Population:
       child = parent1.crossover(parent2)
       child.mutate()
 
-      self.dnas[i] = child
+      self.elements[i] = child
     
     self.generation += 1
 
   def evaluate(self):
-    pass
+    for dna in self.elements:
+      tmp = ''.join(dna.genes)
+      if tmp == self.target:
+        return f"Generation #{self.generation}) {tmp}"
+    
+    return False
 
 class Utils:
   @staticmethod
@@ -114,5 +119,4 @@ while True:
 
   if test:
     print(test)
-    print("Best generation: ", population.generation)
     break
