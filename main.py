@@ -55,6 +55,10 @@ class Population:
 
     return pow(score / len(self.target), 10)
 
+  def _pickParent(self):
+    index = random.randrange(len(self.mappingpool))
+    return self.mappingpool[index]
+
   def selection(self):
     self.fitness = [self._fitness(dna) for dna in self.elements]
 
@@ -76,10 +80,8 @@ class Population:
 
     # new generation
     for i in range(len(self.elements)):
-      a = random.randrange(len(self.mappingpool))
-      b = random.randrange(len(self.mappingpool))
-      parent1 = self.mappingpool[a]
-      parent2 = self.mappingpool[b]
+      parent1 = self._pickParent()
+      parent2 = self._pickParent()
 
       child = parent1.crossover(parent2)
       child.mutate()
