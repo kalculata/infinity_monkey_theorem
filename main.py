@@ -1,4 +1,3 @@
-from asyncore import poll
 from math import floor
 import random
 
